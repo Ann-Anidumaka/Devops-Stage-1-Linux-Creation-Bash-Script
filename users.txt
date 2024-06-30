@@ -1,0 +1,5 @@
+ann; sudo,dev
+kosi; dev,hr
+evie; hr,design
+dolapo; sudo,hr
+ify; dev
