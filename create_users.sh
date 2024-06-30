@@ -5,34 +5,33 @@ LOGFILE="/var/log/user_management.log"
 PASSFILE="/var/secure/user_passwords.csv"
 INPUTFILE="$1"
 
-# Ensure secure storage for passwords
+
 mkdir -p /var/secure
 chmod 700 /var/secure
 
-# Initialize log file
+# Initializing log file
 echo "User management actions log" > "$LOGFILE"
 
-# Function to generate a random password
+# random password generation
 generate_password() {
     openssl rand -base64 12
 }
 
-# Read input file line by line and process each user
+# This is to Read input file line by line and process each user
 while IFS=';' read -r username groups || [[ -n "$username" ]]; do
-    # Skip empty lines or lines with only whitespace
     if [[ -z "${username// }" ]]; then
         continue
     fi
 
-    # Check if user already exists
+    # Checks if user already exists
     if id "$username" &>/dev/null; then
         echo "User $username already exists" | tee -a "$LOGFILE"
     else
-        # Create user
+        # If it doesn't it Creates user
         useradd -m -s /bin/bash "$username"
         echo "Created user $username" | tee -a "$LOGFILE"
 
-        # Generate password
+        # Then Generates password for user
         password=$(generate_password)
 
         # Set password
@@ -40,7 +39,7 @@ while IFS=';' read -r username groups || [[ -n "$username" ]]; do
         echo "$username,$password" >> "$PASSFILE"
     fi
 
-    # Process groups
+    # Groups
      IFS=',' read -ra group_arr <<< "$groups"
     for group in "${group_arr[@]}"; do
         if [ -n "$group" ]; then
@@ -53,7 +52,7 @@ while IFS=';' read -r username groups || [[ -n "$username" ]]; do
         fi
     done
 
-    # Set permissions for the home directory
+    # Sets permissions for the home directory
     chown -R "$username:$username" "/home/$username"
     chmod 700 "/home/$username"
     echo "Set permissions for home directory of $username" | tee -a "$LOGFILE"
