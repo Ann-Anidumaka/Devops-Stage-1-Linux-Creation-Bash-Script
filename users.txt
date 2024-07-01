@@ -1,5 +1,6 @@
-ann; sudo,dev
-kosi; dev,hr
-evie; hr,design
-dolapo; sudo,hr
-ify; dev
+light;sudo,dev,www-data
+ann;sudo
+kosi;dev,www-data
+evie;finance,hr
+dolapo;marketing,sales
+ify;it,security,network
