@@ -1,0 +1,2 @@
+# Ignore user passwords file
+/var/secure/user_passwords.csv
