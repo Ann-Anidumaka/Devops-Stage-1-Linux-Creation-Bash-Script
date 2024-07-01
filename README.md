@@ -135,3 +135,11 @@ This project demonstrates a Dockerized Bash script for streamlined user creation
    
  - ```bash
    docker run -it --name user_creation_container user_creation
+
+## Links to Blog Post
+**Dev.to**
+https://dev.to/anncodes0001/linux-user-creation-bash-script-3gna
+
+**Medium**
+https://medium.com/@AnnAnidumaka/linux-user-creation-bash-script-d59a646f17b6
+
